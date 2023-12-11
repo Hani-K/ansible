@@ -1,0 +1,13 @@
+# To prepare a managed node for ansible, make sure the follow things are in place
+# this whole process can also be automated using a bash script	
+
+# on the managed node
+1. create an ansible user
+2. add the ansible user to sudo/wheel group
+3. make sure python is installed (python 3.11 or newer)
+4. make sure the ip of the machine is static (DHCP lease or nmtui)
+
+# on the control node
+1. create an ssh key (or use an avilable one).
+2. send the ssh public key to the managed node (ssh-copy-id)
+3. add the ip of the managed node in the inventory file.

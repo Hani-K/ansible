@@ -5,6 +5,7 @@ ansible all --key-file ~/.ssh/ansible -i inventory -m ping
 # To test connectivity using the pre-configured ansible.cfg file
 ansible all -m ping
 
+
 # troubleshoot hosts
 # To view all available hosts that ansible connects to
 ansible all --list-hosts
@@ -14,3 +15,18 @@ ansible all -m gather_facts
 
 # Get info while limiting to a certain host
 ansible all -m gather_facts --limit 192.168.0.11
+
+
+# interact with package manager
+# dnf update
+ansible all -m dnf -a "name='*' state=latest" --become --ask-become-pass
+
+# apt update
+ansible all -m apt -a updated_cache=true --become --ask-become-pass
+
+# install (replace dnf with apt or yum)
+ansible all -m dnf -a "name='nano' state=present" --become --ask-become-pass
+ansible all -m dnf -a name=nano --become --ask-become-pass
+
+# remove (replace dnf with apt or yum)
+ansible all -m dnf -a "name='telnet' state=absent" --become --ask-become-pass
